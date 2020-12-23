@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Practice</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Vue Practice</h1>
+    <div id="app">
+      <div class="books" v-if="showBooks">
+        <ul>
+          <!-- use v-for to loop through data -->
+          <!-- note the use of conditional classes, to add default classes (ie without binding use the unbounded class tag like I did with 'test' ) -->
+          <li v-for="item in books" :class="{fav: item.isFav}" class="test" @click='toggleFav(item)'>
+            <span> {{item.title}} - <strong>{{item.author}}</strong> </span>
+            <img :src="item.img" :alt="item.title" />
+          </li>
+        </ul>
+      </div>
+
+      <!-- * v-if for conditional rendering 
+        * use 'v-on:' or '@' so setup vue on-event methods -->
+      <button @click="toggleBook">
+        <span v-if="showBooks">Hide Books</span>
+        <span v-else>Show Books</span>
+      </button>
+
+      <!-- mouse events -->
+      <h2>TESTING MOUSE EVENTS</h2>
+      <!-- to pass in args to handleEvent use $event as the first arg or else the event object will be inaccessible -->
+      <div class="box" @mouseover='handleEvent($event, "random string")'>
+        mouseover - enter
+      </div>
+      <div class="box" @mouseleave="handleEvent">mouseleave</div>
+      <div class="box" @dblclick="handleEvent">double click</div>
+      <div class="box" @mousemove="handleMouseMove">
+        <div>pointer position (mousemove demo)</div>
+        <span>x = {{x}}</span> <br />
+        <span>y = {{y}}</span>
+      </div>
+
+      <!-- ATTRIBUTE BINDING IN VUE -->
+      <!-- use 'v-bind:' or ':' to bind attributes in Vue -->
+      <a :href="url">Bound link</a>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
