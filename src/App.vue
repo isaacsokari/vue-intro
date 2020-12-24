@@ -1,13 +1,25 @@
 <template>
   <h1>My First Vue App</h1>
-  <Modal
-    :header="header"
-    :text="text"
-    theme="sale"
-    :showModal="showModal"
-    @closemodal="toggleModal"
-  />
-  <button @click="toggleModal">Show Modal</button>
+  <Modal theme="sale" :showModal="showModal" @closemodal="toggleModalOne">
+    <h1>Modal Header</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odio
+      reprehenderit unde facilis suscipit autem, quibusdam quo itaque nesciunt
+      dicta consequatur aliquam rerum et nam quas. Voluptas doloribus dolore
+      deleniti?
+    </p>
+
+    <template v-slot:links>
+      <a href="#">Link in a named slot</a>
+    </template>
+  </Modal>
+  <button @click="toggleModalOne">Show Modal One</button>
+
+  <Modal :showModal="showModalTwo" @closemodal="toggleModalTwo">
+    <h1>{{ modalHeader }}</h1>
+    <p>{{ modalText }}</p>
+  </Modal>
+  <button @click="toggleModalTwo">Show Modal Two</button>
 </template>
 
 <script>
@@ -20,26 +32,24 @@ export default {
   },
   data() {
     return {
-      header: 'Modal Header',
-      text:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem molestias praesentium eaque doloremque quam cum aliquam nobis impedit, dolore laborum libero totam quod excepturi nisi expedita, dolor temporibus deleniti tempora.',
       showModal: false,
+      showModalTwo: false,
+      modalHeader: 'Modal Two Header',
+      modalText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem molestias praesentium eaque doloremque quam cum aliquam nobis impedit, dolore laborum libero totam quod excepturi nisi expedita, dolor temporibus deleniti tempora.'
     };
   },
   methods: {
-    toggleModal() {
+    toggleModalOne() {
       this.showModal = !this.showModal;
+    },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo;
     },
   },
 };
 </script>
 
 <style>
-body {
-  position: relative;
-  margin: 0;
-}
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
