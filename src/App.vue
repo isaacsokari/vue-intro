@@ -1,24 +1,29 @@
 <template>
   <h1>My First Vue App</h1>
-  <Modal theme="sale" :showModal="showModal" @closemodal="toggleModalOne">
-    <h1>Modal Header</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odio
-      reprehenderit unde facilis suscipit autem, quibusdam quo itaque nesciunt
-      dicta consequatur aliquam rerum et nam quas. Voluptas doloribus dolore
-      deleniti?
-    </p>
+  <teleport to="#modals">
+    <Modal theme="sale" :showModal="showModal" @closemodal="toggleModalOne">
+      <h1>Modal Header</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odio
+        reprehenderit unde facilis suscipit autem, quibusdam quo itaque nesciunt
+        dicta consequatur aliquam rerum et nam quas. Voluptas doloribus dolore
+        deleniti?
+      </p>
 
-    <template v-slot:links>
-      <a href="#">Link in a named slot</a>
-    </template>
-  </Modal>
+      <template v-slot:links>
+        <a href="#">Link in a named slot</a>
+      </template>
+    </Modal>
+  </teleport>
   <button @click="toggleModalOne">Show Modal One</button>
 
-  <Modal :showModal="showModalTwo" @closemodal="toggleModalTwo">
-    <h1>{{ modalHeader }}</h1>
-    <p>{{ modalText }}</p>
-  </Modal>
+  <teleport to="#modals">
+    <Modal :showModal="showModalTwo" @closemodal="toggleModalTwo">
+      <h1>{{ modalHeader }}</h1>
+      <p>{{ modalText }}</p>
+    </Modal>
+  </teleport>
+
   <button @click="toggleModalTwo">Show Modal Two</button>
 </template>
 
@@ -35,7 +40,8 @@ export default {
       showModal: false,
       showModalTwo: false,
       modalHeader: 'Modal Two Header',
-      modalText: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem molestias praesentium eaque doloremque quam cum aliquam nobis impedit, dolore laborum libero totam quod excepturi nisi expedita, dolor temporibus deleniti tempora.'
+      modalText:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem molestias praesentium eaque doloremque quam cum aliquam nobis impedit, dolore laborum libero totam quod excepturi nisi expedita, dolor temporibus deleniti tempora.',
     };
   },
   methods: {
@@ -50,7 +56,8 @@ export default {
 </script>
 
 <style>
-#app {
+#app,
+#modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
