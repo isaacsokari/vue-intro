@@ -1,52 +1,37 @@
 <template>
-  <h1>My First Vue App</h1>
-  <teleport to="#modals">
-    <Modal theme="sale" :showModal="showModal" @closemodal="toggleModalOne">
-      <h1>Modal Header</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odio
-        reprehenderit unde facilis suscipit autem, quibusdam quo itaque nesciunt
-        dicta consequatur aliquam rerum et nam quas. Voluptas doloribus dolore
-        deleniti?
-      </p>
+  <h1>Ninja Reaction Timer</h1>
+  <button @click="start" :disabled="isPlaying">play</button>
 
-      <template v-slot:links>
-        <a href="#">Link in a named slot</a>
-      </template>
-    </Modal>
-  </teleport>
-  <button @click="toggleModalOne">Show Modal One</button>
+  <Block v-if="isPlaying" :delay="delay" @stopTimer="stop" />
 
-  <teleport to="#modals">
-    <Modal :showModal="showModalTwo" @closemodal="toggleModalTwo">
-      <h1>{{ modalHeader }}</h1>
-      <p>{{ modalText }}</p>
-    </Modal>
-  </teleport>
-
-  <button @click="toggleModalTwo">Show Modal Two</button>
+  <Results v-if="showResults" :score="score" />
 </template>
 
 <script>
-import Modal from './components/Modal.vue';
+import Block from './components/Block.vue';
+import Results from './components/Results.vue';
 
 export default {
   name: 'App',
-  components: {
-    Modal,
-  },
+  components: { Block, Results },
   data() {
     return {
-      showModal: false,
-      showModalTwo: false,
-      modalHeader: 'Modal Two Header',
-      modalText:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem molestias praesentium eaque doloremque quam cum aliquam nobis impedit, dolore laborum libero totam quod excepturi nisi expedita, dolor temporibus deleniti tempora.',
+      isPlaying: false,
+      delay: null,
+      showResults: false,
+      score: 0,
     };
   },
   methods: {
-    toggleModalOne() {
-      this.showModal = !this.showModal;
+    start() {
+      this.isPlaying = true;
+      this.showResults = false;
+      this.delay = 2000 + Math.floor(Math.random() * 5001);
+    },
+    stop(time) {
+      this.isPlaying = false;
+      this.showResults = true;
+      this.score = time;
     },
     toggleModalTwo() {
       this.showModalTwo = !this.showModalTwo;
