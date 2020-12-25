@@ -6,6 +6,7 @@
     <!-- password -->
     <label for="password">Password:</label>
     <input type="password" name="password" id="password" v-model="password" />
+    <div v-if="passwordError" class="error">{{ passwordError }}</div>
     <!-- role -->
     <label for="role">Role:</label>
     <select name="role" id="role" v-model="role">
@@ -48,6 +49,7 @@ export default {
       names: [],
       tempSkill: '',
       skills: [],
+      passwordError: '',
     };
   },
   methods: {
@@ -68,6 +70,10 @@ export default {
     handleSubmit(e) {
       e.preventDefault();
       console.log('form submitted');
+      this.passwordError =
+        this.password.length < 6
+          ? 'password must be at least 6 characters long'
+          : '';
     },
   },
 };
@@ -146,6 +152,6 @@ button {
   color: #ff0062;
   margin-top: 10px;
   font-size: 0.8em;
-  font-weight: bold;
+  font-weight: 300;
 }
 </style>
