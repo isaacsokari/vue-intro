@@ -9,14 +9,93 @@
       <option value="developer">Web Developer</option>
       <option value="designer">Web Designer</option>
     </select>
-    <input type="checkbox" required name="terms" id="terms" v-model="terms" />
-    <label for="terms">Accept Terms and Conditions</label>
+    <div>
+      <input type="checkbox" required name="terms" id="terms" v-model="terms" />
+      <label for="terms">Accept Terms and Conditions</label>
+    </div>
+    <div>
+      <label for="names">Colleagues</label>
+      <div>
+        <input
+          type="checkbox"
+          required
+          name="names"
+          value="Tomiwa"
+          v-model="names"
+        />
+        <label for="tomiwa">Tomiwa</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          required
+          name="names"
+          value="Abbie"
+          v-model="names"
+        />
+        <label for="abbie">Abbie</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          required
+          name="names"
+          value="Oyindamola"
+          v-model="names"
+        />
+        <label for="oyin">Oyindamola</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          required
+          name="names"
+          value="Tams"
+          v-model="names"
+        />
+        <label for="tams">Tams</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          required
+          name="names"
+          value="Samuel"
+          v-model="names"
+        />
+        <label for="samuel">Samuel</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          required
+          name="names"
+          value="Ghost"
+          v-model="names"
+        />
+        <label for="ghost">Samuel (Ghost)</label>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          required
+          name="names"
+          value="ibrahim"
+          v-model="names"
+        />
+        <label for="ibrahim">Ibrahim</label>
+      </div>
+    </div>
   </form>
 
   <p>Email: {{ email }}</p>
   <p>Password: {{ password }}</p>
   <p>Role: {{ role }}</p>
   <p>Accepted Terms: {{ terms }}</p>
+  <p>
+    Colleagues:
+    <span v-for="name in names" :key="name">{{ name }}, </span>
+  </p>
 </template>
 
 <script>
@@ -27,6 +106,7 @@ export default {
       password: '',
       role: 'developer',
       terms: false,
+      names: [],
     };
   },
   methods: {
