@@ -1,14 +1,18 @@
 <template>
-  <form>
+  <form @submit="handleSubmit">
+    <!-- email -->
     <label for="email">Email:</label>
     <input type="email" name="email" id="email" v-model="email" />
+    <!-- password -->
     <label for="password">Password:</label>
     <input type="password" name="password" id="password" v-model="password" />
+    <!-- role -->
     <label for="role">Role:</label>
     <select name="role" id="role" v-model="role">
       <option value="developer">Web Developer</option>
       <option value="designer">Web Designer</option>
     </select>
+    <!-- terms -->
     <div>
       <input type="checkbox" required name="terms" id="terms" v-model="terms" />
       <label for="terms">Accept Terms and Conditions</label>
@@ -29,6 +33,7 @@
         {{ skill }}
       </span>
     </div>
+    <button type="submit" class="submit">Create an Account</button>
   </form>
 
   <p>Email: {{ email }}</p>
@@ -66,6 +71,10 @@ export default {
     removeSkill(skillToDelete) {
       this.skills = this.skills.filter((skill) => skill !== skillToDelete);
     },
+    handleSubmit(e) {
+      e.preventDefault();
+      console.log('form submitted');
+    },
   },
 };
 </script>
@@ -78,6 +87,8 @@ form {
   text-align: left;
   padding: 40px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 label {
   color: #aaa;
@@ -122,5 +133,25 @@ input[type='checkbox'] {
   font-weight: bold;
   color: #777;
   cursor: pointer;
+}
+button {
+  background: #0b6dff;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.submit {
+  text-align: center;
+  margin: 20px auto;
+  align-self: center;
+}
+.error {
+  color: #ff0062;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: bold;
 }
 </style>
