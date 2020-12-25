@@ -35,12 +35,6 @@
     </div>
     <button type="submit" class="submit">Create an Account</button>
   </form>
-
-  <p>Email: {{ email }}</p>
-  <p>Password: {{ password }}</p>
-  <p>Role: {{ role }}</p>
-  <p>Accepted Terms: {{ terms }}</p>
-  <p>TempSkill: {{ tempSkill }}</p>
 </template>
 
 <script>
