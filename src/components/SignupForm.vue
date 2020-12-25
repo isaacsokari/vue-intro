@@ -13,78 +13,21 @@
       <input type="checkbox" required name="terms" id="terms" v-model="terms" />
       <label for="terms">Accept Terms and Conditions</label>
     </div>
+
+    <!-- skills -->
     <div>
-      <label for="names">Colleagues</label>
-      <div>
-        <input
-          type="checkbox"
-          required
-          name="names"
-          value="Tomiwa"
-          v-model="names"
-        />
-        <label for="tomiwa">Tomiwa</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          required
-          name="names"
-          value="Abbie"
-          v-model="names"
-        />
-        <label for="abbie">Abbie</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          required
-          name="names"
-          value="Oyindamola"
-          v-model="names"
-        />
-        <label for="oyin">Oyindamola</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          required
-          name="names"
-          value="Tams"
-          v-model="names"
-        />
-        <label for="tams">Tams</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          required
-          name="names"
-          value="Samuel"
-          v-model="names"
-        />
-        <label for="samuel">Samuel</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          required
-          name="names"
-          value="Ghost"
-          v-model="names"
-        />
-        <label for="ghost">Samuel (Ghost)</label>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          required
-          name="names"
-          value="ibrahim"
-          v-model="names"
-        />
-        <label for="ibrahim">Ibrahim</label>
-      </div>
+      <label for="skills">Skills</label>
+      <br />
+      <small>use commas to add skill, click skill to delete</small>
+      <input type="text" id="skills" v-model="tempSkill" @keyup="addSkill" />
+      <span
+        v-for="skill in skills"
+        :key="skill"
+        @click="removeSkill(skill)"
+        class="pill"
+      >
+        {{ skill }}
+      </span>
     </div>
   </form>
 
@@ -92,10 +35,7 @@
   <p>Password: {{ password }}</p>
   <p>Role: {{ role }}</p>
   <p>Accepted Terms: {{ terms }}</p>
-  <p>
-    Colleagues:
-    <span v-for="name in names" :key="name">{{ name }}, </span>
-  </p>
+  <p>TempSkill: {{ tempSkill }}</p>
 </template>
 
 <script>
@@ -107,11 +47,24 @@ export default {
       role: 'developer',
       terms: false,
       names: [],
+      tempSkill: '',
+      skills: [],
     };
   },
   methods: {
     handleInput(e) {
       this[e.target.name] = e.target.value;
+    },
+    addSkill(e) {
+      if (e.key === ',' && this.tempSkill.split(',')[0]) {
+        if (!this.skills.includes(this.tempSkill.split(',')[0])) {
+          this.skills.push(this.tempSkill.split(',')[0]);
+        }
+        this.tempSkill = '';
+      }
+    },
+    removeSkill(skillToDelete) {
+      this.skills = this.skills.filter((skill) => skill !== skillToDelete);
     },
   },
 };
@@ -134,6 +87,12 @@ label {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
+}
+small {
+  color: #bbb;
+  display: block;
+  font-size: 0.6em;
+  letter-spacing: 1px;
 }
 input,
 select {
