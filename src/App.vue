@@ -1,42 +1,19 @@
 <template>
-  <h1>Ninja Reaction Timer</h1>
-  <button @click="start" :disabled="isPlaying">play</button>
+  <h1>Signup Form</h1>
 
-  <Block v-if="isPlaying" :delay="delay" @stopTimer="stop" />
-
-  <Results v-if="showResults" :score="score" />
+  <SignupForm />
 </template>
 
 <script>
-import Block from './components/Block.vue';
-import Results from './components/Results.vue';
+import SignupForm from './components/SignupForm';
 
 export default {
   name: 'App',
-  components: { Block, Results },
+  components: { SignupForm },
   data() {
-    return {
-      isPlaying: false,
-      delay: null,
-      showResults: false,
-      score: 0,
-    };
+    return {};
   },
-  methods: {
-    start() {
-      this.isPlaying = true;
-      this.showResults = false;
-      this.delay = 2000 + Math.floor(Math.random() * 5001);
-    },
-    stop(time) {
-      this.isPlaying = false;
-      this.showResults = true;
-      this.score = time;
-    },
-    toggleModalTwo() {
-      this.showModalTwo = !this.showModalTwo;
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -46,22 +23,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #444;
+  color: #2c3e50;
   margin-top: 60px;
 }
-button {
-  background: #0faf87;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 16px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  margin: 10px;
-}
-button[disabled] {
-  opacity: 0.2;
-  cursor: not-allowed;
+body {
+  margin: 0;
+  background: #eee;
 }
 </style>
